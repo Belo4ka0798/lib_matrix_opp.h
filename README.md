@@ -3,12 +3,19 @@ Library for operations with matrix
 
 Function:
     1. Sum
+    
     2. Sub
+    
     3. Mul number
+    
     4. Mul matrix on matrix
+    
     5. Transpose
+    
     6. Determinant
+    
     7. Calculate complements
+    
     8. Inverse matrix
 
 Build library:
