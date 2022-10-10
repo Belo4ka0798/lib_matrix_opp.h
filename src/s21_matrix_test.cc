@@ -3,14 +3,14 @@
 #include <gtest/gtest.h>
 
 void randm(S21Matrix &m) {
-  for (unsigned int i = 0; i < m.GetRows(); i++)
-    for (unsigned int j = 0; j < m.GetCols(); j++)
+  for (int i = 0; i < m.get_rows(); i++)
+    for (int j = 0; j < m.get_cols(); j++)
       m(i, j) = rand() % 10;
 }
 
 void printm(S21Matrix &m) {
-  for (unsigned int i = 0; i < m.GetRows(); i++) {
-    for (unsigned int j = 0; j < m.GetCols(); j++)
+  for (int i = 0; i < m.get_rows(); i++) {
+    for (int j = 0; j < m.get_cols(); j++)
       std::cout << m(i, j) << " ";
     std::cout << std::endl;
   }
@@ -18,8 +18,8 @@ void printm(S21Matrix &m) {
 
 TEST(test, EqMatrix_1) {
   S21Matrix josky, flex;
-  for (unsigned int i = 0; i < josky.GetRows(); i++) {
-    for (unsigned int j = 0; j < josky.GetCols(); j++) {
+  for (int i = 0; i < josky.get_rows(); i++) {
+    for (int j = 0; j < josky.get_cols(); j++) {
       josky(i, j) = 1;
       flex(i, j) = 1;
     }
@@ -96,8 +96,8 @@ TEST(test, MulNumber_2) {
 TEST(test, MulMatrix_1) {
   S21Matrix josky(2, 3), flex(3, 2);
   double count = 1;
-  for (unsigned int i = 0; i < 2; i++) {
-    for (unsigned int j = 0; j < 3; j++) {
+  for (int i = 0; i < 2; i++) {
+    for (int j = 0; j < 3; j++) {
       josky(i, j) = count;
       flex(j, i) = count;
       count++;
@@ -115,8 +115,8 @@ TEST(test, MulMatrix_1) {
 TEST(test, MulMatrix_2) {
   S21Matrix josky(2, 3), flex(4, 2);
   double count = 1;
-  for (unsigned int i = 0; i < 2; i++) {
-    for (unsigned int j = 0; j < 3; j++) {
+  for (int i = 0; i < 2; i++) {
+    for (int j = 0; j < 3; j++) {
       josky(i, j) = count;
       flex(j, i) = count;
       count++;
@@ -128,8 +128,8 @@ TEST(test, MulMatrix_2) {
 TEST(test, Transpose_1) {
   S21Matrix josky(2, 3), flex(3, 2);
   double count = 1;
-  for (unsigned int i = 0; i < 2; i++) {
-    for (unsigned int j = 0; j < 3; j++) {
+  for (int i = 0; i < 2; i++) {
+    for (int j = 0; j < 3; j++) {
       josky(i, j) = count;
       flex(j, i) = count;
       count++;
@@ -142,8 +142,8 @@ TEST(test, Transpose_1) {
 TEST(test, Transpose_2) {
   S21Matrix josky(2, 3), flex(3, 2);
   double count = 1;
-  for (unsigned int i = 0; i < 2; i++) {
-    for (unsigned int j = 0; j < 3; j++) {
+  for (int i = 0; i < 2; i++) {
+    for (int j = 0; j < 3; j++) {
       josky(i, j) = count;
       flex(j, i) = count;
       count++;
@@ -156,8 +156,8 @@ TEST(test, Transpose_2) {
 TEST(test, CalcComplements_1) {
   S21Matrix josky(2, 2), flex(2, 2);
   int count = 1;
-  for (unsigned int i = 0; i < 2; i++) {
-    for (unsigned int j = 0; j < 2; j++) {
+  for (int i = 0; i < 2; i++) {
+    for (int j = 0; j < 2; j++) {
       josky(i, j) = count;
       count++;
     }
@@ -173,8 +173,8 @@ TEST(test, CalcComplements_1) {
 TEST(test, Determinant_1) {
   S21Matrix josky;
   int count = 1;
-  for (unsigned int i = 0; i < 3; i++) {
-    for (unsigned int j = 0; j < 3; j++) {
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
       josky(i, j) = count;
       count++;
     }
@@ -185,8 +185,8 @@ TEST(test, Determinant_1) {
 TEST(test, Determinant_2) {
   S21Matrix josky;
   int count = 0;
-  for (unsigned int i = 0; i < 3; i++) {
-    for (unsigned int j = 0; j < 3; j++) {
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
       josky(i, j) = count;
       count += i + j;
     }
@@ -198,8 +198,8 @@ TEST(test, Determinant_2) {
 TEST(test, Inverse_1) {
   S21Matrix josky(2, 2), flex(2, 2);
   int count = 1;
-  for (unsigned int i = 0; i < 2; i++) {
-    for (unsigned int j = 0; j < 2; j++) {
+  for (int i = 0; i < 2; i++) {
+    for (int j = 0; j < 2; j++) {
       josky(i, j) = count;
       count++;
     }
@@ -229,17 +229,17 @@ TEST(test, Inverse_2) {
 TEST(get_set, t1) {
   S21Matrix m1(2, 2);
   m1(1, 1) = 123.456;
-  EXPECT_EQ(m1.GetCols(), 2);
-  EXPECT_EQ(m1.GetRows(), 2);
+  EXPECT_EQ(m1.get_cols(), 2);
+  EXPECT_EQ(m1.get_rows(), 2);
   EXPECT_DOUBLE_EQ(m1(1, 1), 123.456);
 }
 
 TEST(set_col, t1) {
   S21Matrix m(2, 2);
   m(1, 1) = 123.456;
-  m.SetCols(3);
+  m.set_cols(3);
   m(1, 2) = 999.999;
-  EXPECT_EQ(m.GetCols(), 3);
+  EXPECT_EQ(m.get_cols(), 3);
   EXPECT_DOUBLE_EQ(m(1, 1), 123.456);
   EXPECT_DOUBLE_EQ(m(1, 2), 999.999);
 }
@@ -247,31 +247,31 @@ TEST(set_col, t1) {
 TEST(set_row, t1) {
   S21Matrix m1(2, 2);
   m1(1, 0) = 123.456;
-  m1.SetRows(3);
+  m1.set_rows(3);
   m1(2, 0) = m1(1, 0);
-  EXPECT_EQ(m1.GetRows(), 3);
-  EXPECT_EQ(m1.GetCols(), 2);
+  EXPECT_EQ(m1.get_rows(), 3);
+  EXPECT_EQ(m1.get_cols(), 2);
   EXPECT_DOUBLE_EQ(m1(1, 0), m1(2, 0));
 }
 
 TEST(constructors, t1) {
   S21Matrix m1;
-  EXPECT_EQ(m1.GetCols(), 3);
-  EXPECT_EQ(m1.GetRows(), 3);
+  EXPECT_EQ(m1.get_cols(), 3);
+  EXPECT_EQ(m1.get_rows(), 3);
 
   S21Matrix m2(5, 5);
   m2(1, 1) = 123.456;
-  EXPECT_EQ(m2.GetCols(), 5);
-  EXPECT_EQ(m2.GetRows(), 5);
+  EXPECT_EQ(m2.get_cols(), 5);
+  EXPECT_EQ(m2.get_rows(), 5);
 
   S21Matrix m3(m2);
   EXPECT_EQ(m2 == m3, true);
 
   S21Matrix m4(std::move(m3));
-  EXPECT_EQ(m3.GetCols(), 0);
-  EXPECT_EQ(m3.GetRows(), 0);
-  EXPECT_EQ(m4.GetRows(), 5);
-  EXPECT_EQ(m4.GetCols(), 5);
+  EXPECT_EQ(m3.get_cols(), 0);
+  EXPECT_EQ(m3.get_rows(), 0);
+  EXPECT_EQ(m4.get_rows(), 5);
+  EXPECT_EQ(m4.get_cols(), 5);
   EXPECT_EQ(m4(1, 1), m2(1, 1));
 }
 
@@ -502,21 +502,54 @@ TEST(func9, iverse1) {
   given(2, 0) = 5.0;
   given(2, 1) = -2.0;
   given(2, 2) = -3.0;
-
   ASSERT_TRUE(given.InverseMatrix() == expected);
 }
 
 TEST(method1, first) {
   S21Matrix m;
-  EXPECT_EQ(m.GetCols(), 3);
-  EXPECT_EQ(m.GetRows(), 3);
+  EXPECT_EQ(m.get_cols(), 3);
+  EXPECT_EQ(m.get_rows(), 3);
 }
 
 TEST(method2, second) {
   S21Matrix m(11, 11);
-  EXPECT_EQ(m.GetCols(), 11);
-  EXPECT_EQ(m.GetRows(), 11);
+  EXPECT_EQ(m.get_cols(), 11);
+  EXPECT_EQ(m.get_rows(), 11);
   EXPECT_EQ(m(10, 10), 0);
+}
+
+TEST(operator, mul) {
+  S21Matrix m1(3, 3);
+  S21Matrix m2(3, 3);
+
+  for (int i = 0; i < m1.get_rows(); ++i)
+    for (int j = 0; j < m1.get_cols(); ++j) {
+      m1(i, j) = (i + 1) * j + 1;
+      m2(i, j) = (i + 1) * j + 1;
+    }
+
+  m1.MulMatrix(m2);
+  EXPECT_EQ(3, m1.get_cols());
+  EXPECT_EQ(3, m1.get_rows());
+  for (int i = 0; i < m1.get_rows(); ++i)
+    for (int j = 0; j < m1.get_cols(); ++j)
+      if (j == 0)
+        EXPECT_DOUBLE_EQ(6 + 3 * i, m1(i, j));
+      else if (j == 1)
+        EXPECT_DOUBLE_EQ(20 + 11 * i, m1(i, j));
+      else
+        EXPECT_DOUBLE_EQ(34 + 19 * i, m1(i, j));
+
+  S21Matrix m3(3, 1);
+  ASSERT_ANY_THROW(m3.MulMatrix(m2));
+
+  for (int i = 0; i < m3.get_rows(); ++i)
+    m3(i, 0) = 2;
+  m2.MulMatrix(m3);
+  EXPECT_EQ(1, m2.get_cols());
+  EXPECT_EQ(3, m2.get_rows());
+  for (int i = 0; i < m2.get_rows(); ++i)
+    EXPECT_DOUBLE_EQ(12 + 6 * i, m2(i, 0));
 }
 
 TEST(method3, third) {
@@ -524,8 +557,8 @@ TEST(method3, third) {
 
   S21Matrix m2(m1);
 
-  EXPECT_EQ(m1.GetCols(), m2.GetCols());
-  EXPECT_EQ(m1.GetRows(), m2.GetRows());
+  EXPECT_EQ(m1.get_cols(), m2.get_cols());
+  EXPECT_EQ(m1.get_rows(), m2.get_rows());
 }
 
 TEST(method4, fourth) {
@@ -533,10 +566,71 @@ TEST(method4, fourth) {
 
   S21Matrix m2(std::move(m1));
 
-  EXPECT_EQ(m1.GetCols(), 0);
-  EXPECT_EQ(m1.GetRows(), 0);
-  EXPECT_EQ(m2.GetCols(), 123);
-  EXPECT_EQ(m2.GetRows(), 123);
+  EXPECT_EQ(m1.get_cols(), 0);
+  EXPECT_EQ(m1.get_rows(), 0);
+  EXPECT_EQ(m2.get_cols(), 123);
+  EXPECT_EQ(m2.get_rows(), 123);
+}
+
+TEST(valgr, gg) {
+  int rows = 3;
+  int cols = 3;
+  S21Matrix given(rows, cols);
+  S21Matrix expected(rows, cols);
+
+  given(0, 0) = 1.0;
+  given(0, 1) = 2.0;
+  given(0, 2) = 3.0;
+  given(1, 0) = 4.0;
+  given(1, 1) = 5.0;
+  given(1, 2) = 6.0;
+  given(2, 0) = 7.0;
+  given(2, 1) = 8.0;
+  given(2, 2) = 9.0;
+  given.set_rows(4);
+
+  given.set_rows(2);
+  given.set_cols(2);
+
+  expected(0, 0) = 10.0;
+  expected(0, 1) = 11.0;
+  expected(0, 2) = 12.0;
+  expected(1, 0) = 13.0;
+  expected(1, 1) = 14.0;
+  expected(1, 2) = 15.0;
+  expected(2, 0) = 16.0;
+  expected(2, 1) = 17.0;
+  expected(2, 2) = 18.0;
+  expected.set_cols(4);
+
+  expected.set_cols(2);
+  expected.set_rows(2);
+
+  S21Matrix oper_Sum = given + expected;
+  S21Matrix oper_Sub = given - expected;
+  S21Matrix oper_MulNM = 10 * given;
+  S21Matrix oper_MulMN = given * 10;
+  S21Matrix oper_MulM = given * expected;
+  S21Matrix Sum(2, 2);
+  Sum += given;
+  S21Matrix Sub(2, 2);
+  Sub -= given;
+  S21Matrix MulN(2, 2);
+  MulN *= 10;
+  S21Matrix MulM(2, 2);
+  MulM *= given;
+  S21Matrix func_sum(2, 2);
+  func_sum.SumMatrix(given);
+  S21Matrix func_sub(2, 2);
+  func_sub.SubMatrix(given);
+  S21Matrix func_muln(2, 2);
+  func_muln.MulNumber(10);
+  S21Matrix func_mulm(2, 2);
+  func_mulm.MulMatrix(given);
+  S21Matrix func_trans(2, 2);
+  func_trans = given.Transpose();
+  S21Matrix func_inverse(2, 2);
+  func_inverse = given.InverseMatrix();
 }
 
 int main() {

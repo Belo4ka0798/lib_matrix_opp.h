@@ -6,9 +6,6 @@ EXEC_NAME=test.out
 SOURCES_LIB=s21_matrix_oop.cc
 OBJECTS_LIB=$(SOURCES_LIB:.cc=.o)
 
-
-.PHONY: all clean test gcov_report
-
 all: s21_matrix_oop.a test gcov_report 
 
 s21_matrix_oop.a:
@@ -35,10 +32,6 @@ gcov_report:
 	open report/index.html
 
 # support target
-run: s21_matrix_oop.a
-	$(CC) $(CFLAGS) test.cc s21_matrix_oop.a -o $(EXEC_NAME)
-	./$(EXEC_NAME)
-
 clang-format:
 	@echo "---clang-format---"
 	@clang-format -n *.cc *.h
@@ -46,3 +39,5 @@ clang-format:
 	@echo
 
 check: clang-format
+
+.PHONY: all clean test gcov_report
